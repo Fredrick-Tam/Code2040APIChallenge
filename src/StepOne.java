@@ -2,9 +2,7 @@ import java.io.*;
 import java.net.*;
 import org.json.simple.JSONObject;
 
-
 public class StepOne {
-
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		
@@ -63,7 +61,5 @@ public class StepOne {
 		e.printStackTrace();
 
 	  }
-
 	}
-
 }

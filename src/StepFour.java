@@ -1,18 +1,17 @@
 import java.io.*;
 import java.net.*;
-import java.util.ArrayList;
-
+import java.util.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class StepFour {
-
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws ParseException {
 	  // use try catch blocks handle exceptions
 	  try { 
+
 		// URL to make API call to get prefix 
 		URL url = new URL("http://challenge.code2040.org/api/prefix");
 		
@@ -115,7 +114,5 @@ public class StepFour {
 		e.printStackTrace();
 
 	  }
-
 	}
-
 }

@@ -6,11 +6,12 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 public class StepFive {
-
 	@SuppressWarnings("unchecked")
+	
 	public static void main(String[] args) throws ParseException, java.text.ParseException {
 	// use try catch blocks handle exceptions
 	try { 
+
 		// Setting up HTTP Objects
 		URL url = new URL("http://challenge.code2040.org/api/dating");
 		HttpURLConnection apicall = (HttpURLConnection) url.openConnection();
@@ -121,7 +122,5 @@ public class StepFive {
 		e.printStackTrace();
 
 	  }
-
 	}
-
 }

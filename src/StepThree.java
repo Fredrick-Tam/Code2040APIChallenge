@@ -1,10 +1,5 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.*;
-
-
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -13,8 +8,8 @@ public class StepThree {
 
 	public static void main(String[] args) throws ParseException {
 		// use try catch blocks handle exceptions
-		try { 
-			
+		try {
+
 			// URL to make API call to get haystack
 			URL url = new URL("http://challenge.code2040.org/api/haystack");
 			
@@ -66,6 +61,7 @@ public class StepThree {
 				if(needle.equals(haystack.get(i)))
 					positionOfWord = i;
 			}
+
 			System.out.println("needle: " + needle + " |" +" position in haystack: " + positionOfWord);
 			apicall.disconnect();
 			
@@ -113,8 +109,6 @@ public class StepThree {
 		  } catch (IOException e) {
 
 			e.printStackTrace();
-
-		  }
-
 		}
 	}
+}
