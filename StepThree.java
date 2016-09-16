@@ -12,26 +12,26 @@ public class StepThree {
 
 			// URL to make API call to get haystack
 			URL url = new URL("http://challenge.code2040.org/api/haystack");
-			
+
 			// Setting up HTTP Objects
 			HttpURLConnection apicall = (HttpURLConnection) url.openConnection();
 			apicall.setRequestMethod("POST");
-	        apicall.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-	        apicall.setRequestProperty("Accept", "application/json");
-	        apicall.setDoInput(true);
-	        apicall.setDoOutput(true);
-	        
-	        // JSON object to be sent to end point
-	        JSONObject input = new JSONObject();
-	        input.put("token", "f736e65019698ece59249b39364ec100");
-	       
-	        // Creating Output Stream of api call
-	        System.out.println(input.toJSONString());
-	        OutputStream os = apicall.getOutputStream();
-	        os.write(input.toString().getBytes("UTF-8"));
-	        os.close();
-	     
-	        // If call is not successful, get error code for easy debugging
+			apicall.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+			apicall.setRequestProperty("Accept", "application/json");
+			apicall.setDoInput(true);
+			apicall.setDoOutput(true);
+
+			// JSON object to be sent to end point
+			JSONObject input = new JSONObject();
+			input.put("token", "f736e65019698ece59249b39364ec100");
+
+			// Creating Output Stream of api call
+			System.out.println(input.toJSONString());
+			OutputStream os = apicall.getOutputStream();
+			os.write(input.toString().getBytes("UTF-8"));
+			os.close();
+
+			// If call is not successful, get error code for easy debugging
 			if (apicall.getResponseCode() != 200) {
 				throw new RuntimeException("Your Request failed : HTTP error code : "
 				+ apicall.getResponseCode());
@@ -39,8 +39,9 @@ public class StepThree {
 
 			BufferedReader br = new BufferedReader(new InputStreamReader((apicall.getInputStream())));
 			String output;
-			String response = null; 
+			String response = null;
 			System.out.println("Output from Server .... \n");
+
 			while ((output = br.readLine()) != null) {
 				// Assign API response to string for further processing
 				response = output;
@@ -51,11 +52,11 @@ public class StepThree {
 			int positionOfWord = 0;
 			JSONParser parser = new JSONParser();
 			JSONObject obj = (JSONObject) parser.parse(response);
-			
+
 			// Get value of needle and haystack array
 			String needle = (String) obj.get("needle");
 			JSONArray haystack = (JSONArray) obj.get("haystack");
-			
+
 			// search for location of needle string in haystack
 			for (int i =0; i< haystack.size(); i++){
 				if(needle.equals(haystack.get(i)))
@@ -64,7 +65,7 @@ public class StepThree {
 
 			System.out.println("needle: " + needle + " |" +" position in haystack: " + positionOfWord);
 			apicall.disconnect();
-			
+
 			// Setting API call to send position of needle
 			URL url2 = new URL("http://challenge.code2040.org/api/haystack/validate");
 			HttpURLConnection data = (HttpURLConnection) url2.openConnection();
@@ -73,21 +74,21 @@ public class StepThree {
 			data.setRequestProperty("Accept", "application/json");
 			data.setDoInput(true);
 			data.setDoOutput(true);
-	        
+
 			// Making the JSON object to send
-	        JSONObject params = new JSONObject();
-	        params.put("token", "f736e65019698ece59249b39364ec100");
-	        params.put("needle", String.valueOf(positionOfWord));
-	        
-	        // Printing out JSON to check formatting
-	        System.out.println(params.toJSONString());
-	        
-	        // Send data to end point
-	        OutputStream submission = data.getOutputStream();
-	        submission.write(params.toString().getBytes("UTF-8"));
-	        submission.close();
-	     
-	        // Get error code if API call fails 
+			JSONObject params = new JSONObject();
+			params.put("token", "f736e65019698ece59249b39364ec100");
+			params.put("needle", String.valueOf(positionOfWord));
+
+			// Printing out JSON to check formatting
+			System.out.println(params.toJSONString());
+
+			// Send data to end point
+			OutputStream submission = data.getOutputStream();
+			submission.write(params.toString().getBytes("UTF-8"));
+			submission.close();
+
+			// Get error code if API call fails
 			if (data.getResponseCode() != 200) {
 				throw new RuntimeException("Failed : HTTP error code : "
 						+ data.getResponseCode());
@@ -100,15 +101,12 @@ public class StepThree {
 			while ((output2 = br2.readLine()) != null) {
 				System.out.println(output2);
 			}
+
 			data.disconnect();
-
-		  } catch (MalformedURLException e) {
-
-			e.printStackTrace();
-
-		  } catch (IOException e) {
-
-			e.printStackTrace();
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
 		}
 	}
 }
